@@ -27,6 +27,40 @@ npm start
 - Ссылки на источники для каждого вывода.
 - Структурированная база знаний в `data/knowledge-base.json`.
 
+## Демонстрационный тест-кейс 
+
+![Демонстрация перевода воздушной тревоги у курицы](./screenshots/chicken-aerial-alarm1.png)
+
+![Демонстрация перевода воздушной тревоги у курицы](./screenshots/chicken-aerial-alarm2.png)
+
+![Демонстрация перевода воздушной тревоги у курицы](./screenshots/chicken-aerial-alarm3.png)
+
+## Схема приложения
+
+```mermaid
+flowchart TD
+    User["Пользователь"] --> UI["index.html: форма ввода и результат"]
+    UI --> App["src/app.js: логика прототипа"]
+    App --> KB["data/knowledge-base.json: база знаний"]
+    KB --> Species["species: виды животных"]
+    KB --> Rules["rules: правила перевода"]
+    KB --> Sources["sources: научные и проверяемые источники"]
+    App --> Match["Поиск признаков: keywords и requiresAny"]
+    Match --> Score["Расчет уверенности: confidenceBase + признаки + полнота ввода"]
+    Score --> Result["Вероятный перевод, альтернативы, объяснение, источники"]
+    Result --> UI
+```
+
+**Компоненты и технологии:**
+
+- `index.html`: статическая страница и структура интерфейса.
+- `src/styles.css`: адаптивная верстка, панели формы, результата и базы знаний.
+- `src/app.js`: загрузка JSON, выбор вида, сопоставление правил, расчет уверенности и рендер результата.
+- `data/knowledge-base.json`: структурированное хранилище видов, правил, признаков и источников.
+- `tools/server.mjs`: локальный Node.js-сервер без внешних зависимостей.
+- `package.json`: команда запуска `npm start`.
+- Технологии: HTML, CSS, vanilla JavaScript, JSON, Node.js static server, Mermaid для схемы.
+
 ## Как устроена база знаний
 
 База знаний хранится в JSON и содержит:
