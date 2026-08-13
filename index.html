@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animal Translator Lab</title>
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">≋</span>
+          <span>Animal Translator Lab</span>
+        </div>
+        <span class="status-pill">Explainable prototype</span>
+      </header>
+
+      <section class="hero" aria-labelledby="pageTitle">
+        <div>
+          <h1 id="pageTitle">Переводчик сигналов животных с честной уверенностью</h1>
+          <p>Прототип сопоставляет описание поведения, звук, контекст и параметры с правилами из базы знаний. Он показывает вероятную трактовку, альтернативы и источники, на которые опирается вывод.</p>
+        </div>
+        <div class="signal-visual" aria-label="Схематичная визуализация звуковых волн и пчелиного танца">
+          <div class="wave-row" aria-hidden="true">
+            <span style="height: 35%"></span>
+            <span style="height: 72%"></span>
+            <span style="height: 48%"></span>
+            <span style="height: 90%"></span>
+            <span style="height: 42%"></span>
+            <span style="height: 68%"></span>
+            <span style="height: 30%"></span>
+            <span style="height: 78%"></span>
+            <span style="height: 56%"></span>
+          </div>
+          <div class="dance-map" aria-hidden="true"><span></span></div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Рабочая область переводчика">
+        <form class="panel form-panel" id="translatorForm">
+          <h2>Ввод сигнала</h2>
+          <label>
+            Вид
+            <select id="species" name="species"></select>
+          </label>
+          <label>
+            Поведение
+            <textarea id="behavior" name="behavior" placeholder="Опишите позу, движение, повторяемость и направление внимания"></textarea>
+          </label>
+          <label>
+            Звук
+            <input id="sound" name="sound" placeholder="Например: низкий грубый лай, шипение, мяуканье, виляющая фаза">
+          </label>
+          <label>
+            Контекст
+            <input id="context" name="context" placeholder="Кто рядом, где происходит, что случилось перед сигналом">
+          </label>
+          <label>
+            Параметры
+            <input id="parameters" name="parameters" placeholder="Длительность, темп, угол, расстояние, серия повторов">
+          </label>
+          <div class="button-row">
+            <button class="primary" type="submit">Перевести</button>
+            <button id="exampleButton" type="button">Заполнить пример</button>
+          </div>
+        </form>
+
+        <section class="panel result-panel" aria-live="polite">
+          <h2>Результат</h2>
+          <div class="result-empty" id="resultEmpty">Заполните наблюдение и запустите перевод.</div>
+          <div id="resultContent" hidden>
+            <h3 class="result-title" id="resultTitle"></h3>
+            <p class="result-meta" id="resultMeta"></p>
+            <div class="confidence">
+              <div class="confidence-track" aria-label="Уверенность">
+                <div class="confidence-fill" id="confidenceFill"></div>
+              </div>
+              <strong id="confidenceValue">0%</strong>
+            </div>
+            <div class="evidence-grid">
+              <div>
+                <div class="mini-section">
+                  <h3>Почему система так решила</h3>
+                  <p id="explanation"></p>
+                </div>
+                <div class="mini-section">
+                  <h3>Найденные признаки</h3>
+                  <div class="chips" id="matchedSignals"></div>
+                </div>
+                <div class="mini-section">
+                  <h3>Честная оговорка</h3>
+                  <p id="honestyNote"></p>
+                </div>
+              </div>
+              <div>
+                <div class="mini-section">
+                  <h3>Альтернативы</h3>
+                  <ul id="alternatives"></ul>
+                </div>
+                <div class="mini-section">
+                  <h3>Источники</h3>
+                  <div class="sources" id="sourceLinks"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="knowledge" aria-labelledby="knowledgeTitle">
+        <h2 id="knowledgeTitle">База знаний</h2>
+        <div class="species-tabs" id="speciesTabs"></div>
+        <p id="speciesSummary"></p>
+        <div class="knowledge-list" id="knowledgeList"></div>
+      </section>
+    </main>
+
+    <script src="./src/app.js"></script>
+  </body>
+</html>

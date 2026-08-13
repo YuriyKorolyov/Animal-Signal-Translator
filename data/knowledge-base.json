@@ -1,0 +1,268 @@
+{
+  "version": "0.1.0",
+  "updated": "2026-08-13",
+  "species": [
+    {
+      "id": "dog",
+      "name": "Домашняя собака",
+      "latin": "Canis familiaris",
+      "summary": "Правила используют контекст лая, грубость/высоту звука, повторяемость и позу тела.",
+      "rules": [
+        {
+          "id": "dog-alert-stranger",
+          "translation": "Вероятный сигнал тревоги: рядом незнакомец или нарушение границы.",
+          "confidenceBase": 0.66,
+          "keywords": ["незнаком", "звонок", "двер", "ворот", "забор", "рыч", "низк", "груб", "громк", "напряж"],
+          "requiresAny": ["незнаком", "звонок", "двер", "ворот", "забор"],
+          "evidence": "В исследованиях лай различался по контекстам: незнакомец у ограды, изоляция и игра; собаки реагировали на контекст и знакомость источника лая.",
+          "alternatives": [
+            "Охрана ресурса или территории без прямой угрозы",
+            "Возбуждение от неожиданного события"
+          ],
+          "sourceIds": ["dog-context-barks", "dog-intraspecific"]
+        },
+        {
+          "id": "dog-isolation",
+          "translation": "Вероятный сигнал социального дискомфорта: одиночество, просьба о контакте или возвращении владельца.",
+          "confidenceBase": 0.6,
+          "keywords": ["один", "закрыт", "скул", "долго", "повтор", "хозя", "уход", "изоляц", "высок"],
+          "requiresAny": ["один", "закрыт", "хозя", "уход", "изоляц"],
+          "evidence": "Изоляционный лай выделяется как отдельный контекст в работах по акустике собачьего лая.",
+          "alternatives": [
+            "Фрустрация из-за барьера",
+            "Ожидание прогулки или еды"
+          ],
+          "sourceIds": ["dog-context-barks"]
+        },
+        {
+          "id": "dog-play",
+          "translation": "Похоже на игровое возбуждение: приглашение продолжать взаимодействие.",
+          "confidenceBase": 0.58,
+          "keywords": ["игр", "прыга", "виля", "поклон", "быстр", "коротк", "перерыв", "мяч"],
+          "requiresAny": ["игр", "поклон", "мяч", "виля"],
+          "evidence": "Игровой лай в исследованиях отделяется от тревожного и изоляционного контекстов по акустике и ситуации.",
+          "alternatives": [
+            "Общее возбуждение без намерения играть",
+            "Требование внимания"
+          ],
+          "sourceIds": ["dog-context-barks"]
+        }
+      ]
+    },
+    {
+      "id": "cat",
+      "name": "Домашняя кошка",
+      "latin": "Felis catus",
+      "summary": "Правила опираются на вокализацию, положение хвоста/ушей, напряжение тела и социальный контекст.",
+      "rules": [
+        {
+          "id": "cat-friendly-tail",
+          "translation": "Вероятно дружелюбное приближение или приветствие.",
+          "confidenceBase": 0.62,
+          "keywords": ["хвост вверх", "поднят", "трется", "мур", "медлен", "мягк", "подходит", "привет"],
+          "requiresAny": ["хвост вверх", "поднят", "трется", "подходит"],
+          "evidence": "Популярные и справочные материалы по поведению кошек описывают поднятый хвост и контактное трение как дружественные социальные сигналы.",
+          "alternatives": [
+            "Ожидание еды или открывания двери",
+            "Исследовательский интерес к человеку"
+          ],
+          "sourceIds": ["cat-loc", "cat-vocal-review"]
+        },
+        {
+          "id": "cat-threat",
+          "translation": "Вероятный сигнал угрозы или оборонительного стресса: кошка просит увеличить дистанцию.",
+          "confidenceBase": 0.68,
+          "keywords": ["шип", "рыч", "уши назад", "прижат", "выгнул", "шерсть", "зрач", "угол", "пряч"],
+          "requiresAny": ["шип", "рыч", "уши назад", "прижат", "выгнул"],
+          "evidence": "Шипение, рычание, выгнутая спина и увеличенный силуэт обычно связаны с угрозой, страхом или защитной реакцией.",
+          "alternatives": [
+            "Боль или медицинский дискомфорт",
+            "Защита территории или ресурса"
+          ],
+          "sourceIds": ["cat-loc", "cat-vocal-review"]
+        },
+        {
+          "id": "cat-request",
+          "translation": "Вероятная просьба к человеку: еда, доступ, внимание или помощь.",
+          "confidenceBase": 0.57,
+          "keywords": ["мяу", "у двери", "миска", "еда", "смотрит", "повтор", "высок", "человек", "утро"],
+          "requiresAny": ["мяу", "миска", "еда", "у двери"],
+          "evidence": "Мяуканье взрослых домашних кошек часто рассматривается как сигнал, активно используемый в коммуникации с человеком.",
+          "alternatives": [
+            "Приветствие",
+            "Стресс от закрытого доступа"
+          ],
+          "sourceIds": ["cat-vocal-review", "cat-loc"]
+        }
+      ]
+    },
+    {
+      "id": "bee",
+      "name": "Медоносная пчела",
+      "latin": "Apis mellifera",
+      "summary": "Правила моделируют танцевальный сигнал: форма, длительность виляющей фазы, направление относительно вертикали и качество ресурса.",
+      "rules": [
+        {
+          "id": "bee-waggle-food",
+          "translation": "Вероятное сообщение о пищевом ресурсе: направление и примерная дистанция закодированы в танце.",
+          "confidenceBase": 0.72,
+          "keywords": ["виля", "восьмер", "танец", "нектар", "пыльц", "корм", "угол", "сек", "возврат"],
+          "requiresAny": ["виля", "восьмер", "танец"],
+          "evidence": "Виляющий танец передает направление и расстояние до ресурса; продолжительность виляющей фазы связана с дистанцией.",
+          "alternatives": [
+            "Рекрутирование к новому месту гнездования у роевых пчел",
+            "Близкий ресурс с переходной формой танца"
+          ],
+          "sourceIds": ["bee-riley", "bee-distance"]
+        },
+        {
+          "id": "bee-round-close",
+          "translation": "Вероятный сигнал о близком ресурсе около улья без надежного указания направления.",
+          "confidenceBase": 0.6,
+          "keywords": ["круг", "рядом", "близко", "меньше 50", "коротк", "нектар"],
+          "requiresAny": ["круг", "рядом", "близко", "меньше 50"],
+          "evidence": "Круговой танец обычно трактуют как рекрутирование к близкому источнику; современные работы описывают континуум между круговым и виляющим танцем.",
+          "alternatives": [
+            "Переходный танец для средней дистанции",
+            "Недостаточно наблюдений для оценки направления"
+          ],
+          "sourceIds": ["bee-ncstate", "bee-continuum"]
+        }
+      ]
+    }
+    ,
+    {
+      "id": "chicken",
+      "name": "Домашняя курица",
+      "latin": "Gallus gallus domesticus",
+      "summary": "Правила используют тип тревожного крика, направление угрозы, пищевое кудахтанье, tidbitting-поведение и социальный контекст стаи.",
+      "rules": [
+        {
+          "id": "chicken-food-call",
+          "translation": "Вероятный пищевой сигнал: найден съедобный объект, и птица привлекает других к ресурсу.",
+          "confidenceBase": 0.67,
+          "keywords": ["еда", "корм", "зерно", "черв", "кудах", "клюет", "поднимает", "роняет", "tidbitting", "самец", "курица подходит"],
+          "requiresAny": ["еда", "корм", "зерно", "черв", "tidbitting", "клюет"],
+          "evidence": "У домашних кур пищевые calls связаны с обнаружением еды, а частота сигналов меняется в зависимости от качества ресурса и присутствия получателя.",
+          "alternatives": [
+            "Социальное привлечение без явного пищевого объекта",
+            "Обычное кормовое возбуждение стаи"
+          ],
+          "sourceIds": ["chicken-food-calls-1986", "chicken-food-referential"]
+        },
+        {
+          "id": "chicken-aerial-alarm",
+          "translation": "Вероятная воздушная тревога: над головой замечен хищник или быстро движущийся объект.",
+          "confidenceBase": 0.7,
+          "keywords": ["сверху", "небо", "ястреб", "птица", "летит", "воздуш", "резкий крик", "присела", "укрытие", "смотрит вверх"],
+          "requiresAny": ["сверху", "небо", "ястреб", "летит", "воздуш", "смотрит вверх"],
+          "evidence": "Эксперименты с воспроизведением показали, что воздушные тревожные calls кур вызывают у получателей бегство к укрытию, приседание и взгляд вверх.",
+          "alternatives": [
+            "Испуг от внезапного шума сверху",
+            "Реакция на крупный неопасный объект в воздухе"
+          ],
+          "sourceIds": ["chicken-alarm-reference", "chicken-cognition-review"]
+        },
+        {
+          "id": "chicken-ground-alarm",
+          "translation": "Вероятная наземная тревога: рядом объект на земле, требующий бдительности и сканирования.",
+          "confidenceBase": 0.64,
+          "keywords": ["земле", "трава", "кошка", "лиса", "собака", "змея", "насторож", "вытянулась", "сканирует", "низкий крик"],
+          "requiresAny": ["земле", "кошка", "лиса", "собака", "змея", "насторож"],
+          "evidence": "У домашних кур описаны разные тревожные calls для воздушных и наземных угроз; наземные сигналы вызывают более выраженную бдительную позу и сканирование.",
+          "alternatives": [
+            "Территориальная настороженность без хищника",
+            "Реакция на незнакомый объект во дворе"
+          ],
+          "sourceIds": ["chicken-alarm-reference", "chicken-cognition-review"]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "dog-context-barks",
+      "title": "Barking in domestic dogs: context specificity and individual identification",
+      "authors": "Pongracz et al.",
+      "year": 2004,
+      "url": "https://doi.org/10.1016/j.anbehav.2003.07.016"
+    },
+    {
+      "id": "dog-intraspecific",
+      "title": "More than noise? Field investigations of intraspecific acoustic communication in dogs",
+      "authors": "Pongracz et al.",
+      "year": 2014,
+      "url": "https://doi.org/10.1016/j.applanim.2014.08.003"
+    },
+    {
+      "id": "cat-loc",
+      "title": "How do cats communicate with each other?",
+      "authors": "Library of Congress",
+      "year": 2019,
+      "url": "https://www.loc.gov/item/how-do-cats-communicate-with-each-other/"
+    },
+    {
+      "id": "cat-vocal-review",
+      "title": "Meowsic: Acoustic analysis of cat vocalisations",
+      "authors": "Schotz et al.",
+      "year": 2016,
+      "url": "https://portal.research.lu.se/en/publications/meowsic-acoustic-analysis-of-cat-vocalisations"
+    },
+    {
+      "id": "bee-riley",
+      "title": "The flight paths of honeybees recruited by the waggle dance",
+      "authors": "Riley et al.",
+      "year": 2005,
+      "url": "https://www.nature.com/articles/nature03526"
+    },
+    {
+      "id": "bee-distance",
+      "title": "The spatial information content of the honey bee waggle dance",
+      "authors": "Couvillon et al.",
+      "year": 2015,
+      "url": "https://www.frontiersin.org/articles/10.3389/fevo.2015.00022/full"
+    },
+    {
+      "id": "bee-continuum",
+      "title": "Do honeybees have two discrete dances to advertise food sources?",
+      "authors": "Couvillon et al.",
+      "year": 2008,
+      "url": "https://doi.org/10.1016/j.anbehav.2008.01.032"
+    },
+    {
+      "id": "bee-ncstate",
+      "title": "The Honey Bee Dance Language",
+      "authors": "NC State Extension",
+      "year": 2025,
+      "url": "https://content.ces.ncsu.edu/honey-bee-dance-language"
+    },
+    {
+      "id": "chicken-food-calls-1986",
+      "title": "Vocal communication in the domestic chicken: I. Does a sender communicate information about the quality of a food referent to a receiver?",
+      "authors": "Marler et al.",
+      "year": 1986,
+      "url": "https://doi.org/10.1016/0003-3472(86)90022-9"
+    },
+    {
+      "id": "chicken-food-referential",
+      "title": "Chicken food calls are functionally referential",
+      "authors": "Evans and Evans",
+      "year": 1999,
+      "url": "https://doi.org/10.1006/anbe.1999.1143"
+    },
+    {
+      "id": "chicken-alarm-reference",
+      "title": "On the meaning of alarm calls: functional reference in an avian vocal system",
+      "authors": "Evans et al.",
+      "year": 1993,
+      "url": "https://doi.org/10.1006/anbe.1993.1158"
+    },
+    {
+      "id": "chicken-cognition-review",
+      "title": "Thinking chickens: a review of cognition, emotion, and behavior in the domestic chicken",
+      "authors": "Marino",
+      "year": 2017,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5306232/"
+    }
+  ]
+}
